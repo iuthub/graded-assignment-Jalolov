@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get("/", "TaskController@index")->middleware("auth");
+Route::post("/", "TaskController@store");
+Route::get("/{editTask}/edit", "TaskController@edit");
+Route::patch("/update/{updateTask}", "TaskController@update");
+Route::get("/delete/{deleteTask}", "TaskController@delete");
+
+Auth::routes();
